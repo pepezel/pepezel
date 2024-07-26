@@ -1,0 +1,17 @@
+#include <stdio.h>
+ 
+int main() {
+ double A, B, MEDIA;
+ 
+ scanf("%lf", &A);
+ scanf("%lf", &B);
+ 
+  double pesoA = 3.5;
+    double pesoB = 7.5;
+    
+  double media = (A * pesoA + B * pesoB) / (pesoA + pesoB);
+    
+    printf("MEDIA = %.5lf\n", media);
+    
+    return 0;
+}
