@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+int main()
+{
+    int escolha;
+    double num1, num2;
+    float num3, num4, num5;
+    
+    do {
+        printf("\n--- Menu de Operações ---\n");
+        printf("0. Sair\n");
+        printf("1. Soma\n");
+        printf("2. subtração\n");
+        printf("3. Divisão\n");
+        printf("4. Potenciação\n");
+        printf("5. Raiz Quadrada\n");
+        printf("6. Fatorial\n");
+        printf("7. MDC\n");
+        printf("8. MMC\n");
+        printf("9. Equação de Segundo Grau\n");
+        printf("Escolha um número entre 0 e 10");
+        scanf("%d", &escolha);
+        
+        switch (escolha) {
+          case 1:
+          printf("Digite um número: ");
+          scanf("%lf", &num1);
+          printf("Digite um segundo número");
+          scanf("%lf", &num2);
+          printf("Resultado: %lf + %lf = %.5lf\n", num1, num2, soma(num1, num2));
+          break;
+          
+        }
+     }while (escolha != 0);
+     return (0);
+}
+
+double soma (double a, double b)
+{
+    double soma = 0.0;
+    soma = a+b;
+    
+}
