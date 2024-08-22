@@ -1,43 +1,225 @@
 #include <stdio.h>
 
-int main()
-{
-    int escolha;
-    double num1, num2;
-    float num3, num4, num5;
-    
+void soma();
+void subtracao();
+void multiplicacao();
+void divisao();
+void potenciacao();
+void raizQuadrada();
+void fatorial();
+void calcularMDC();
+void calcularMMC();
+void equacaoSegundoGrau();
+double minhaRaizQuadrada(double num);
+int mdc(int a, int b);
+int mmc(int a, int b);
+
+int main() {
+    int opcao;
     do {
-        printf("\n--- Menu de Operações ---\n");
+        printf("\nEscolha a operação:\n");
         printf("0. Sair\n");
         printf("1. Soma\n");
-        printf("2. subtração\n");
-        printf("3. Divisão\n");
-        printf("4. Potenciação\n");
-        printf("5. Raiz Quadrada\n");
-        printf("6. Fatorial\n");
-        printf("7. MDC\n");
-        printf("8. MMC\n");
-        printf("9. Equação de Segundo Grau\n");
-        printf("Escolha um número entre 0 e 10");
-        scanf("%d", &escolha);
-        
-        switch (escolha) {
-          case 1:
-          printf("Digite um número: ");
-          scanf("%lf", &num1);
-          printf("Digite um segundo número");
-          scanf("%lf", &num2);
-          printf("Resultado: %lf + %lf = %.5lf\n", num1, num2, soma(num1, num2));
-          break;
-          
+        printf("2. Subtração\n");
+        printf("3. Multiplicação\n");
+        printf("4. Divisão\n");
+        printf("5. Potenciação\n");
+        printf("6. Raiz Quadrada\n");
+        printf("7. Fatorial\n");
+        printf("8. MDC\n");
+        printf("9. MMC\n");
+        printf("10. Equação de Segundo Grau\n");
+        printf("Digite a sua escolha: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                soma();
+                break;
+            case 2:
+                subtracao();
+                break;
+            case 3:
+                multiplicacao();
+                break;
+            case 4:
+                divisao();
+                break;
+            case 5:
+                potenciacao();
+                break;
+            case 6:
+                raizQuadrada();
+                break;
+            case 7:
+                fatorial();
+                break;
+            case 8:
+                calcularMDC();
+                break;
+            case 9:
+                calcularMMC();
+                break;
+            case 10:
+                equacaoSegundoGrau();
+                break;
+            case 0:
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Opção inválida. Tente novamente.\n");
+                break;
         }
-     }while (escolha != 0);
-     return (0);
+    } while (opcao != 0);
+
+    return 0;
 }
 
-double soma (double a, double b)
-{
-    double soma = 0.0;
-    soma = a+b;
-    
+void soma() {
+    double num1, num2;
+    printf("Digite o primeiro número: ");
+    scanf("%lf", &num1);
+    printf("Digite o segundo número: ");
+    scanf("%lf", &num2);
+    printf("Resultado: %.5lf + %.5lf = %.5lf\n", num1, num2, num1 + num2);
+}
+
+void subtracao() {
+    double num1, num2;
+    printf("Digite o primeiro número: ");
+    scanf("%lf", &num1);
+    printf("Digite o segundo número: ");
+    scanf("%lf", &num2);
+    printf("Resultado: %.5lf - %.5lf = %.5lf\n", num1, num2, num1 - num2);
+}
+
+void multiplicacao() {
+    double num1, num2;
+    printf("Digite o primeiro número: ");
+    scanf("%lf", &num1);
+    printf("Digite o segundo número: ");
+    scanf("%lf", &num2);
+    printf("Resultado: %.5lf * %.5lf = %.5lf\n", num1, num2, num1 * num2);
+}
+
+void divisao() {
+    double num1, num2;
+    printf("Digite o primeiro número: ");
+    scanf("%lf", &num1);
+    printf("Digite o segundo número: ");
+    scanf("%lf", &num2);
+    if (num2 != 0) {
+        printf("Resultado: %.5lf / %.5lf = %.5lf\n", num1, num2, num1 / num2);
+    } else {
+        printf("Erro: Divisão por zero.\n");
+    }
+}
+
+void potenciacao() {
+    double base;
+    int expoente;
+    double resultado = 1;
+    printf("Digite a base: ");
+    scanf("%lf", &base);
+    printf("Digite o expoente: ");
+    scanf("%d", &expoente);
+    for (int i = 0; i < expoente; i++) {
+        resultado *= base;
+    }
+    printf("Resultado: %.5lf ^ %d = %.5lf\n", base, expoente, resultado);
+}
+
+void raizQuadrada() {
+    double num;
+    printf("Digite o número: ");
+    scanf("%lf", &num);
+    if (num < 0) {
+        printf("Erro: Número negativo.\n");
+        return;
+    }
+    double resultado = minhaRaizQuadrada(num);
+    printf("Resultado: Raiz quadrada de %.5lf = %.5lf\n", num, resultado);
+}
+
+double minhaRaizQuadrada(double num) {
+    double precisao = 0.00001;
+    double estimativa = num;
+    double raiz = 0;
+    while ((estimativa - raiz) > precisao) {
+        raiz = estimativa;
+        estimativa = (raiz + (num / raiz)) / 2;
+    }
+    return estimativa;
+}
+
+void fatorial() {
+    int num;
+    unsigned long long resultado = 1;
+    printf("Digite um número inteiro: ");
+    scanf("%d", &num);
+    if (num < 0) {
+        printf("Erro: Número negativo.\n");
+        return;
+    }
+    for (int i = 1; i <= num; i++) {
+        resultado *= i;
+    }
+    printf("Resultado: %d! = %llu\n", num, resultado);
+}
+
+int mdc(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+void calcularMDC() {
+    int nums[5];
+    printf("Digite 5 números inteiros:\n");
+    for (int i = 0; i < 5; i++) {
+        scanf("%d", &nums[i]);
+    }
+    int resultado = nums[0];
+    for (int i = 1; i < 5; i++) {
+        resultado = mdc(resultado, nums[i]);
+    }
+    printf("Resultado: MDC dos 5 números é %d\n", resultado);
+}
+
+int mmc(int a, int b) {
+    return (a * b) / mdc(a, b);
+}
+
+void calcularMMC() {
+    int nums[5];
+    printf("Digite 5 números inteiros:\n");
+    for (int i = 0; i < 5; i++) {
+        scanf("%d", &nums[i]);
+    }
+    int resultado = nums[0];
+    for (int i = 1; i < 5; i++) {
+        resultado = mmc(resultado, nums[i]);
+    }
+    printf("Resultado: MMC dos 5 números é %d\n", resultado);
+}
+
+void equacaoSegundoGrau() {
+    double a, b, c;
+    double delta, x1, x2;
+    printf("Digite os coeficientes a, b e c da equação ax^2 + bx + c = 0:\n");
+    scanf("%lf %lf %lf", &a, &b, &c);
+    delta = b * b - 4 * a * c;
+    if (delta > 0) {
+        x1 = (-b + minhaRaizQuadrada(delta)) / (2 * a);
+        x2 = (-b - minhaRaizQuadrada(delta)) / (2 * a);
+        printf("Resultado: x1 = %.5lf, x2 = %.5lf\n", x1, x2);
+    } else if (delta == 0) {
+        x1 = -b / (2 * a);
+        printf("Resultado: x1 = x2 = %.5lf\n", x1);
+    } else {
+        printf("Resultado: A equação não tem raízes reais.\n");
+    }
 }
