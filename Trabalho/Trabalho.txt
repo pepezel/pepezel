@@ -10,7 +10,7 @@ void fatorial();
 void calcularMDC();
 void calcularMMC();
 void equacaoSegundoGrau();
-double minhaRaizQuadrada(double num);
+double RaizQuadrada(double num);
 int mdc(int a, int b);
 int mmc(int a, int b);
 
@@ -29,7 +29,7 @@ int main() {
         printf("8. MDC\n");
         printf("9. MMC\n");
         printf("10. Equação de Segundo Grau\n");
-        printf("Digite a sua escolha: ");
+        printf("Digite o número: ");
         scanf("%d", &opcao);
 
         switch (opcao) {
@@ -64,10 +64,10 @@ int main() {
                 equacaoSegundoGrau();
                 break;
             case 0:
-                printf("Saindo...\n");
+                printf("Saiu\n");
                 break;
             default:
-                printf("Opção inválida. Tente novamente.\n");
+                printf("Opção inválida.\n");
                 break;
         }
     } while (opcao != 0);
@@ -111,7 +111,7 @@ void divisao() {
     if (num2 != 0) {
         printf("Resultado: %.5lf / %.5lf = %.5lf\n", num1, num2, num1 / num2);
     } else {
-        printf("Erro: Divisão por zero.\n");
+        printf("Não pode divisão por zero\n");
     }
 }
 
@@ -134,14 +134,14 @@ void raizQuadrada() {
     printf("Digite o número: ");
     scanf("%lf", &num);
     if (num < 0) {
-        printf("Erro: Número negativo.\n");
+        printf("Não pode número negativo\n");
         return;
     }
-    double resultado = minhaRaizQuadrada(num);
+    double resultado = RaizQuadrada(num);
     printf("Resultado: Raiz quadrada de %.5lf = %.5lf\n", num, resultado);
 }
 
-double minhaRaizQuadrada(double num) {
+double RaizQuadrada(double num) {
     double precisao = 0.00001;
     double estimativa = num;
     double raiz = 0;
@@ -158,7 +158,7 @@ void fatorial() {
     printf("Digite um número inteiro: ");
     scanf("%d", &num);
     if (num < 0) {
-        printf("Erro: Número negativo.\n");
+        printf("Não pode númeoro negativo");
         return;
     }
     for (int i = 1; i <= num; i++) {
@@ -213,8 +213,8 @@ void equacaoSegundoGrau() {
     scanf("%lf %lf %lf", &a, &b, &c);
     delta = b * b - 4 * a * c;
     if (delta > 0) {
-        x1 = (-b + minhaRaizQuadrada(delta)) / (2 * a);
-        x2 = (-b - minhaRaizQuadrada(delta)) / (2 * a);
+        x1 = (-b + RaizQuadrada(delta)) / (2 * a);
+        x2 = (-b - RaizQuadrada(delta)) / (2 * a);
         printf("Resultado: x1 = %.5lf, x2 = %.5lf\n", x1, x2);
     } else if (delta == 0) {
         x1 = -b / (2 * a);
